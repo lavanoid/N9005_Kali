@@ -173,6 +173,11 @@ if [[ -f "kernel/arch/arm/boot/zImage-dtb" ]]; then
     
     echo "[INFO] Changing directory to 'kali-nethunter/nethunter-installer'..."
     cd "kali-nethunter/nethunter-installer/"
+    
+    echo "[INFO] Patching some files so it works with the latest TWRP..."
+    cat "../../boot-patcher-update-binary" > "./boot-patcher/META-INF/com/google/android/update-binary"
+    cat "../../nethunter-installer-update-binary" > "./update/META-INF/com/google/android/update-binary"
+    
     echo "[BUILD] Building the Kali NH package..."
     python3 build.py -d $KALI_DEVNAME --$KERN_ANDROIDVER
     echo "[INFO] Python script called. Cleaning up..."
