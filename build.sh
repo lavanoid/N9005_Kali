@@ -177,9 +177,10 @@ if [[ -f "kernel/arch/arm/boot/zImage-dtb" ]]; then
     echo "[INFO] Patching some files so it works with the latest TWRP..."
     cat "../../boot-patcher-update-binary" > "./boot-patcher/META-INF/com/google/android/update-binary"
     cat "../../nethunter-installer-update-binary" > "./update/META-INF/com/google/android/update-binary"
+    cp -f "../../bootanimation.zip" "./update/system/media/"
     
     echo "[BUILD] Building the Kali NH package..."
-    python3 build.py -d $KALI_DEVNAME --$KERN_ANDROIDVER
+    python3 build.py -d $KALI_DEVNAME --$KERN_ANDROIDVER -fs minimal
     echo "[INFO] Python script called. Cleaning up..."
     
 else
