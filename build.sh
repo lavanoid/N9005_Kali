@@ -188,6 +188,8 @@ if [[ -f "kernel/arch/arm/boot/zImage-dtb" ]]; then
     
     echo "[BUILD] Building the Kali NH package..."
     python3 build.py -d $KALI_DEVNAME --$KERN_ANDROIDVER -fs minimal
+    echo "[BUILD] Building the Kali NH package without a chroot installer..."
+    python3 build.py -d $KALI_DEVNAME --$KERN_ANDROIDVER
     echo "[INFO] Python script called. Cleaning up..."
     
 else
