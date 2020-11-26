@@ -13,7 +13,8 @@ KERN_ANDROIDVNO="10 Q"
 KALI_DEVNAME="n9005LOS"
 BUILD_CORES="2"
 NH_DEVDIR="kali-nethunter/nethunter-installer/devices"
-KERNEL_GIT="https://github.com/lavanoid/android_kernel_samsung_msm8974.git -b lineage-17.1"
+#KERNEL_GIT="https://github.com/lavanoid/android_kernel_samsung_msm8974.git -b lineage-17.1"
+KERNEL_GIT="https://github.com/LineageOS/android_kernel_samsung_msm8974.git -b lineage-17.1"
 
 if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
@@ -102,6 +103,12 @@ export PATH=$PATH:$(pwd)/android_prebuilts_gcc_linux-x86_arm_arm-linux-androidea
 if [[ ! -d "./kernel" ]]; then
     echo "[CONFIGURE] Downloading kernel source code..."
     git clone $KERNEL_GIT ./kernel
+    echo "[PATCH] Downloading kernel patches..."
+    wget "https://github.com/lavanoid/android_kernel_samsung_msm8974/commit/310156e6eb1b93dcc9b81072aeee60fca9d36724.patch"
+    cd kernel
+    echo "[PATCH] Patching kernel..."
+    patch -p1 < ../310156e6eb1b93dcc9b81072aeee60fca9d36724.patch
+    cd ..
 fi
 
 echo "[CONFIGURE] Downloading Kali Nethunter..."
